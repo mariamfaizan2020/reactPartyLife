@@ -74,7 +74,7 @@ import { chainPropTypes } from '@mui/utils';
   
         useEffect(()=>{
           Fetchdata()
-        },[])
+        },[Selectedgroup,selectedCity])
 
         const fileDropdownData = {
           label: "Filter By",
@@ -89,7 +89,7 @@ import { chainPropTypes } from '@mui/utils';
                   label: "Multan",
                   // rightIcon: <SaveAsIcon />,
                   callback: () => {
-                    
+                    setorderBy('city')
                     setSelectedCity("Multan");
                   },
                 },
@@ -97,7 +97,7 @@ import { chainPropTypes } from '@mui/utils';
                   label: "Karachi",
                   // rightIcon: <SaveAsIcon />,
                   callback: () => {
-                   
+                    setorderBy('city')
                     setSelectedCity("Karachi");
                   },
                 },
@@ -105,7 +105,7 @@ import { chainPropTypes } from '@mui/utils';
                   label: "Islamabad",
                   // leftIcon: <SaveAsIcon />,
                   callback: () => {
-                  
+                    setorderBy('city')
                     setSelectedCity("Islamabad");
                   },
                 },
@@ -113,7 +113,7 @@ import { chainPropTypes } from '@mui/utils';
                   label: "Lahore",
                   // rightIcon: <SaveAsIcon />,
                   callback: () => {
-                 
+                    setorderBy('city')
                     setSelectedCity("Lahore");
                   },
                 },
@@ -175,8 +175,17 @@ import { chainPropTypes } from '@mui/utils';
               setEvents(arr)
              
              }
-         
+        
             )
+            if(orderBy==="Date"){
+              const q = query(collection(db, 'Events'), orderBy("timeStamp"));
+onSnapshot(q, (querySnapshot) => {
+  querySnapshot.forEach((doc) => {
+      console.log("data111",JSON.stringify(doc.data())); 
+  });
+});    
+            }
+
             
 
         
@@ -191,7 +200,7 @@ import { chainPropTypes } from '@mui/utils';
       
    
       console.log('info',events)
-      if(selectedCity){
+      if(orderBy==='city'){
         return(
 
           <div>
