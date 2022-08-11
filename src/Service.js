@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import { collection, getDocs ,getDoc, doc} from "firebase/firestore"; 
-import { getFirestore } from "firebase/firestore";
+import { getFirestore} from "firebase/firestore";
 import firebase from './index'
 import {
   
